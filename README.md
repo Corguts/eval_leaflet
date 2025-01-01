@@ -1,0 +1,1 @@
+ceci est une page de webmapping utilisant du css, du javascript, du html sur le thème de l'accès aux parcs et jardins depuis le smétros à Lyon en utilisant du leaflet et du fetch , les jeux de données proviennent de Data Grand Lyon
