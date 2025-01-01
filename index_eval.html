@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+    <html>
+        <!-- partie non visible  head -->
+        <head>
+            <meta charset="utf-8" />
+            <title>Carte Leaflet avec Titre</title>
+            <!-- title permet de donner un titre mais ce n'est pas visible -->
+            <head>
+                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+                <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+                <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+                <link rel="stylesheet" href="css/css_eval.css" />
+                <!-- href est le shemin du fichier -->
+                <!-- link permet de lier un fichier css -->
+
+            </head>
+                
+        </head>     
+    <body> 
+        <!-- partie visible body-->
+        <body>
+    <h1 class="map-title">Evaluation web <img id="id_taille" src="https://cdn.icon-icons.com/icons2/2699/PNG/512/leafletjs_logo_icon_170303.png" /></h1>
+    <div id="map"></div>
+    <div id="info-panel">
+        <h3>Informations sur l'entité</h3>
+        <div id="info-content"></div>
+    </div>
+    <div class="legend">
+
+    </div>
+    <div class="container">
+        <div class="line"></div>
+        <div class="content">           
+        
+        <img id="id_taille2" src="https://fourneyrona.github.io/Cartographie_web/images/MasterGeonum.png" />
+    </div>
+    <div class="text-content">
+        <h3 id="id_auteur">By Corentin Quesnel <span id="id_etude">Master 2 student</span> </h3>
+        <div id="id_date">2024 - 2025</div>
+        <img id="id_taille3" src="https://univ-lyon2.nous-recrutons.fr/wp-content/uploads/sites/129/2022/05/logo-universitelyon2-1024x576.png"/>
+    </div>
+        
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <script src="js/javascript_eval.js"></script>
+    </body>
+</html>
+
+
+<!-- 
+            <a href="https://www.jeuxvideo.com/"> lien jeux vidéos.com  </a>
+            <ul> test pour voir le début de ul
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>Leaflet</li>
+            </ul> -->
+
+
+
+
+
+<!-- se qui reste a faire:
+ enlever la couleur vert des lignes
+ apporter les informations des stations et lignes
+ completer la legende et que la legende soit dynamique selon les données que l'on voit sur notre éqran
+ revoir ka struqture pourque sesoit qoherent
+ faire brillers entités survolés
+-->

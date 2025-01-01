@@ -1,0 +1,298 @@
+body {
+    background-color: rgb(208, 214, 204);
+    margin: 0px;
+    padding: 0;
+    width : 100%;
+    overflow-x: hidden; /* Évite les débordements horizontaux */
+    /* background-color permet de modifier la couleur de fond  */
+}
+/* h2 {
+    font-size: 30px;
+     font-size permet de modifier la taille de la police 
+    color: #90d422;
+    width: 30px;
+    padding: 20px;
+    padding permet de modifier le remplissage 
+} */
+h1 {
+    font-size: 50px;
+    color: #21317a;
+    border : 5px solid ;
+    /* border permet de modifier la bordure */
+    margin: 10px;
+    /* margin permet de modifier la marge */
+    font-family: 'Time ', Times, serif;
+    /* font-family permet de modifier la police */
+    width : 400px;
+    height : 180px;
+}
+
+#map {
+    width: 100%;
+    height: 90vh; /* Prend toute la hauteur de la fenêtre */
+    position: relative;
+}
+
+
+.map-title {
+    position: absolute;
+            top: 20px; /* Ajustez cette valeur pour positionner le titre */
+            left: 20px; /* Ajustez cette valeur pour positionner le titre */
+            background-color: rgba(255, 255, 255, 0.8); /* Fond semi-transparent */
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1000; /* Assure que le titre est au-dessus de la carte */
+}
+
+/* Déplacement initial du curseur */
+.leaflet-control-zoom {
+    position: absolute; /* Permet de positionner avec des pixels */
+    top: 250px; /* Position verticale (en pixels) */
+    left: 15px; /* Position horizontale (en pixels) */
+}
+
+
+
+#id_special {
+    color: green;
+    text-decoration: double underline green; /* Ajoute un soulignement */
+
+}
+
+#id_taille { 
+    width : 400px;
+    height : 200px;
+    margin-top: -50px; /* Déplace l'élément de 20px vers le haut */
+}
+
+#id_taille2 { 
+    width : 300px;
+    height: auto; /* Conserve les proportions de l'image */
+}
+
+#id_taille3 { 
+    width : 300px;
+    height: auto; /* Conserve les proportions de l'image */
+    margin-top: -250px; /* Déplace l'élément de 20px vers le haut */
+}
+
+#id_auteur {
+    text-decoration: underline ; /* Ajoute un soulignement */
+    text-align: center; /* Centre le texte horizontalement */
+    margin-bottom: 10px; /* Ajoute un espace entre le titre et les dates */
+    position: absolute; /* Déplace l'élément de 20px vers la gauche */
+}
+
+.container {
+    position: relative;
+    padding-top: 50px; /* Ajustez cette valeur pour que le container descende en même temps que l'info-panel */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: padding-top 0.3s ease-in-out;
+    margin-top: 20px; /* Ajoutez un espace entre le tableau d'information et le container */
+} /* Ajoutez une transition pour un effet de descente */
+
+
+/* le container permet de faire une séparation  */
+
+.line {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;        
+    /* applique la position du trait  sur la droite */
+    height: 5px; /* applique l'épaisseur des traits */
+    background: linear-gradient(to right, black 10%, transparent 10%, transparent 90%, black 80%);
+    /* applique la forme et la couleur de la séparation*/
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Aligne les éléments avec de l'espace entre eux */
+    width: 100%;
+}
+
+/* alignement sur la même ligne des images et auteur */
+
+#id_etude { 
+    color : rgb(95, 1, 95) ;
+    font-size: 20px;
+    width : 500px;
+    margin-bottom: 20px;
+    display: block; /* Fait revenir l'élément à la ligne */
+    height: auto; /* Ajuste la hauteur automatiquement */
+}
+
+#id_date { 
+    font-size: 40px;
+    width : 1800;
+    height : 0px; /* Centre le texte horizontalement */
+    margin-top: 80px;
+}
+
+.text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(0px); /* Descend le contenu de 20px */
+     font-family: 'Arial', sans-serif; /* Change la police */
+}
+
+
+/* Légende positionnée en bas à gauche avec un fond transparent */
+.legend {
+    position: absolute;
+    top: 200px;  /* Positionner à 20px du bas */    
+    right: 0px; /* Positionner à 20px de la gauche */
+    background-color: rgba(255, 255, 255, 0.7); /* Fond blanc transparent */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    font-family: Arial, sans-serif;
+    z-index: 1000;
+    max-height: 300px;  /* Hauteur maximale pour éviter la superposition */
+    overflow-y: auto;   /* Ajouter un défilement vertical si nécessaire */
+
+}
+
+
+.jardin {
+    fill: green;
+    fill-opacity: 0.2;
+    stroke: green;
+    stroke-width: 2px;
+}
+
+
+
+
+#info-panel {
+    position: absolute;
+    top: 830px;
+    left: 320px;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 1000;
+    width: 65%;
+    box-shadow: 0 0 0px rgba(0, 0, 0, 1);
+    transition: margin-top 0.3s ease-in-out; /* Ajoutez une transition pour un effet de descente */
+}
+
+
+
+#info-panel h3 {
+    margin-top: 0;
+}
+
+#info-content {
+    margin-top: 10px;
+}
+
+#info-content table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Calibri', sans-serif; /* Change la police */
+}
+
+#info-content th, #info-content td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center; /* Centre les informations dans les cellules */
+}
+
+
+#info-content th {
+    background-color: #f2f2f2;
+}
+
+
+
+/* a essayer de mettre */
+.jardin-clicked {
+    fill: blue;
+    fill-opacity: 0.7;
+    stroke: darkgreen;
+    stroke-width: 10px;
+}
+
+.jardin-hover {
+    fill: yellow;
+    fill-opacity: 0.7;
+    stroke: orange;
+    stroke-width: 5px;
+}
+
+.line-hover {
+    stroke: orange;
+    stroke-width: 5px;
+}
+
+.point-hover {
+    fill: yellow;
+    fill-opacity: 0.7;
+    stroke: orange;
+    stroke-width: 5px;
+}
+
+.legend-shape {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    background: transparent; /* Par défaut, transparent */
+}
+
+.legend-shape.jardin {
+    background: radial-gradient(circle, rgba(0, 128, 0, 0.2) 50%, rgba(0, 128, 0, 1) 100%);
+    border: 1px solid green;
+}
+
+
+/* Style pour les éléments de la légende */
+.legend h4 {
+    margin-top: 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Style des formes dans la légende (carré, cercle, etc.) */
+.legend-shape {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+
+.legend p {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.legend .legend-shape {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+}
+
+.legend .jardin {
+    background: radial-gradient(circle, rgba(0, 128, 0, 0.2) 50%, rgba(0, 128, 0, 1) 100%);
+    border: 1px solid green;
+}
+
+.legend .legend-shape:not(.jardin) {
+    /* Pour les lignes avec couleur spécifique */
+    opacity: 1; /* S'assurer qu'elles ne sont pas transparentes */
+}
+
+
+
