@@ -6,18 +6,12 @@ body {
     overflow-x: hidden; /* Évite les débordements horizontaux */
     /* background-color permet de modifier la couleur de fond  */
 }
-/* h2 {
-    font-size: 30px;
-     font-size permet de modifier la taille de la police 
-    color: #90d422;
-    width: 30px;
-    padding: 20px;
-    padding permet de modifier le remplissage 
-} */
+
+
 h1 {
     font-size: 50px;
     color: #21317a;
-    border : 5px solid ;
+    border : 3px solid ;
     /* border permet de modifier la bordure */
     margin: 10px;
     /* margin permet de modifier la marge */
@@ -39,8 +33,8 @@ h1 {
             top: 20px; /* Ajustez cette valeur pour positionner le titre */
             left: 20px; /* Ajustez cette valeur pour positionner le titre */
             background-color: rgba(255, 255, 255, 0.8); /* Fond semi-transparent */
-            padding: 10px;
-            border-radius: 5px;
+            padding: 10px; /* Ajoute de l'espace autour du texte */
+            border-radius: 5px; /* Coins arrondis */
             z-index: 1000; /* Assure que le titre est au-dessus de la carte */
 }
 
@@ -73,15 +67,22 @@ h1 {
 #id_taille3 { 
     width : 300px;
     height: auto; /* Conserve les proportions de l'image */
-    margin-top: -250px; /* Déplace l'élément de 20px vers le haut */
+    margin-top: -90px;
 }
 
-#id_auteur {
-    text-decoration: underline ; /* Ajoute un soulignement */
+.auteur {
+    
     text-align: center; /* Centre le texte horizontalement */
-    margin-bottom: 10px; /* Ajoute un espace entre le titre et les dates */
     position: absolute; /* Déplace l'élément de 20px vers la gauche */
+    display: block; /* Fait revenir l'élément à la ligne */
+    height:Auto; /* Ajuste la hauteur automatiquement */
+    margin-top: 60px;
+    width: 200px;
 }
+
+
+
+
 
 .container {
     position: relative;
@@ -118,26 +119,31 @@ h1 {
 
 #id_etude { 
     color : rgb(95, 1, 95) ;
-    font-size: 20px;
-    width : 500px;
-    margin-bottom: 20px;
-    display: block; /* Fait revenir l'élément à la ligne */
-    height: auto; /* Ajuste la hauteur automatiquement */
+    font-size: 20px; /* Ajustez la taille de la police */
+    text-decoration: underline ; /* Ajoute un soulignement */
 }
 
-#id_date { 
-    font-size: 40px;
-    width : 1800;
-    height : 0px; /* Centre le texte horizontalement */
-    margin-top: 80px;
+#id_date { font-size: 24px; /* Taille de police plus adaptée et élégante */
+    font-weight: bold; /* Met en valeur la date */
+    color: #333; /* Couleur sobre et moderne */
+    text-align: center; /* Centre le texte horizontalement */
+    background-color: #f9f9f9; /* Ajoute un fond clair pour le contraste */
+    padding: 10px 20px; /* Ajoute de l'espace autour du texte */
+    border: 2px solid #ddd; /* Bordure fine pour encadrer la date */
+    border-radius: 8px; /* Coins arrondis pour un style plus doux */
+    box-shadow: 4px 6px rgba(0, 0, 0, 0.1); /* Ajoute une ombre subtile */
+    max-width: 400px; /* Limite la largeur pour éviter que cela devienne trop large */
+    margin: 100px auto; /* Centre le bloc verticalement et horizontalement */
 }
 
 .text-content {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-right: -10px;
     transform: translateY(0px); /* Descend le contenu de 20px */
-     font-family: 'Arial', sans-serif; /* Change la police */
+    font-family: 'Arial', sans-serif; /* Change la police */
+     /* espace entre les éléments */
 }
 
 
