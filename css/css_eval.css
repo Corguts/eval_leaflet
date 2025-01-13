@@ -167,13 +167,6 @@ h1 {
 }
 
 
-/* Style de surbrillance pour les polygones lors du survol */
-.jardin-highlight {
-    stroke: #ff6347;          /* Couleur de la bordure survolée */
-    weight: 4;                /* Poids de la bordure survolée */
-    fill-opacity: 0.5;        /* Opacité du remplissage survolé */
-}
-
 #info-panel {
     position: absolute;
     top: 830px;
