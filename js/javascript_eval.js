@@ -82,7 +82,6 @@ function loadJSON(filePath, layerName) {
                     }
 
 
-
                     
                     // Ajouter un événement de clic pour afficher les informations
 layer.on('click', function () {
@@ -165,54 +164,6 @@ layer.on('click', function () {
             }
         })
         .catch(error => console.error('Erreur lors du chargement du fichier JSON:', error));
-}
-
-function updateLegend() {
-    const visibleCategories = {
-        jardins: false,
-        lignes: false,
-        stations: false
-    };
-
-    map.eachLayer(layer => {
-        if (layer instanceof L.GeoJSON || layer instanceof L.Polygon) {
-            if (map.getBounds().intersects(layer.getBounds())) {
-                visibleCategories.jardins = true;
-            }
-        } else if (layer instanceof L.Polyline) {
-            if (map.getBounds().intersects(layer.getBounds())) {
-                visibleCategories.lignes = true;
-            }
-        } else if (layer instanceof L.MarkerClusterGroup) {
-            if (map.getBounds().intersects(layer.getBounds())) {
-                visibleCategories.stations = true;
-            }
-        }
-    });
-
-    const legendContainer = document.querySelector('.legend');
-    legendContainer.innerHTML = '<h4>Légende</h4>'; // Réinitialiser
-
-    if (visibleCategories.jardins) {
-        legendContainer.innerHTML += `
-            <div>
-                <span class="legend-shape jardin"></span> Parcs et jardins
-            </div>`;
-    }
-
-    if (visibleCategories.lignes) {
-        legendContainer.innerHTML += `
-            <div>
-                <div class="legend-line metro-line"></div> Lignes de métro
-            </div>`;
-    }
-
-    if (visibleCategories.stations) {
-        legendContainer.innerHTML += `
-            <div>
-                <img src="http://www.clipartbest.com/cliparts/niB/Edk/niBEdkxXT.png" width="20" height="20"> Entrées/sorties stations
-            </div>`;
-    }
 }
 
 // Charger les fichiers JSON et les ajouter au gestionnaire de couches
