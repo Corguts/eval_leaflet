@@ -4,7 +4,6 @@ var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 var osmAttrib = 'Map data © OpenStreetMap contributors';
 var osm = new L.TileLayer(osmUrl, { attribution: osmAttrib }).addTo(map);
 
-
 // Ajouter l'échelle
 L.control.scale().addTo(map);
 
@@ -30,13 +29,13 @@ var customIcon = L.icon({
 
 // Tableau de couleurs prédéfinies
 const colors = [
-'rgb(255, 238, 0)',    // jaune
-'rgb(255, 0, 0)',  // rouge
-'rgb(150, 0, 250)',  // violet
-'rgb(255, 136, 0)',  // orange
-'rgb(0, 26, 255)',  // bleu
-'rgb(255, 105, 180)',// rose
-'rgb(77, 34, 3)', // marron
+    'rgb(255, 238, 0)',    // jaune
+    'rgb(255, 0, 0)',      // rouge
+    'rgb(150, 0, 250)',    // violet
+    'rgb(255, 136, 0)',    // orange
+    'rgb(0, 26, 255)',     // bleu
+    'rgb(255, 105, 180)',  // rose
+    'rgb(77, 34, 3)',      // marron
 ];
 
 let colorIndex = 0; // Index pour parcourir le tableau de couleurs
@@ -52,32 +51,19 @@ function loadJSON(filePath, layerName) {
                     return L.marker(latlng, { icon: customIcon });
                 },
                 style: function (feature) {
-                    console.log('Feature type:', feature.geometry.type);
-                    console.log('Layer name:', layerName);
-
                     if (feature.geometry.type === 'MultiPolygon') {
-                        return {
-                            className: 'jardin', // classe dans CSS
-                        };
+                        return { className: 'jardin' }; // Classe CSS pour les jardins
                     } else if (feature.geometry.type === 'Polygon') {
-                        return {
-                            className: 'jardin' // classe dans CSS
-                        };
-
+                        return { className: 'jardin' }; // Classe CSS pour les jardins
                     } else if (feature.geometry.type === 'MultiLineString') {
-                    // Attribuer une couleur du tableau de couleurs prédéfinies
-                    const rgbColor = colors[colorIndex % colors.length];
-                    colorIndex++; // Incrémenter l'index pour la prochaine couleur
-
-                    return {
-                        color: rgbColor,
-                        weight: 5
-                    };
-                } else {
-                    return { color: 'blue', weight: 2 }; // Style par défaut
-                }
-            },
-            onEachFeature: function (feature, layer) {
+                        const rgbColor = colors[colorIndex % colors.length];
+                        colorIndex++; // Incrémenter l'index pour la prochaine couleur
+                        return { color: rgbColor, weight: 5 };
+                    } else {
+                        return { color: 'blue', weight: 2 }; // Style par défaut
+                    }
+                },
+                onEachFeature: function (feature, layer) {
                     if (feature.geometry.type === 'Point') {
                         var latlng = L.latLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]);
                         var circle = L.circle(latlng, {
@@ -94,65 +80,169 @@ function loadJSON(filePath, layerName) {
                             map.removeLayer(circle);
                         });
                     }
-// Ajouter un événement de clic pour afficher les informations
-layer.on('click', function (e) {
-var infoContent = document.getElementById('info-content');
-infoContent.innerHTML = `
-    <table>
-        <tr><th>Nom</th><td>${feature.properties.nom || 'N/A'}</td></tr>
-        <tr><th>Surface totale (m²)</th><td>${feature.properties.surf_tot_m2 || 'N/A'}</td></tr>
-        <tr><th>Gestion</th><td>${feature.properties.gestion || 'N/A'}</td></tr>
-        <tr><th>Accès</th><td>${feature.properties.acces || 'N/A'}</td></tr>
-        <tr><th>Label</th><td>${feature.properties.label || 'N/A'}</td></tr>
-        <tr><th>Type d'équipement</th><td>${feature.properties.type_equip || 'N/A'}</td></tr>
-        <tr><th>Eau</th><td>${feature.properties.eau || 'N/A'}</td></tr>
-        <tr><th>Toilettes</th><td>${feature.properties.toilettes || 'N/A'}</td></tr>
-        <tr><th>Chien</th><td>${feature.properties.chien || 'N/A'}</td></tr>
-        <tr><th>Espace canin</th><td>${feature.properties.esp_can || 'N/A'}</td></tr>
-    </table>
-`;
 
 
-// Zoomer sur l'entité cliquée avec une marge
-if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
-var bounds = L.geoJSON(feature).getBounds();
-map.fitBounds(bounds.pad(1)); // Ajoutez une marge de 10% autour de l'entité
-setTimeout(function() {
-    // Déplacer la vue de la carte vers le haut
-    map.panBy([0, -200]); // Ajustez cette valeur selon vos besoins
-}, 300); // Attendre 300ms pour que le zoom initial se termine
+
+                    
+                    // Ajouter un événement de clic pour afficher les informations
+layer.on('click', function () {
+    var infoContent = document.getElementById('info-content');
+
+    // Vérifier le type de géométrie et afficher les informations en conséquence
+    if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+        // Informations pour les polygones (parcs/jardins par exemple)
+        infoContent.innerHTML = `
+            <table>
+                <tr><th>Nom</th><td>${feature.properties.nom || 'N/A'}</td></tr>
+                <tr><th>Surface totale (m²)</th><td>${feature.properties.surf_tot_m2 || 'N/A'}</td></tr>
+                <tr><th>Gestion</th><td>${feature.properties.gestion || 'N/A'}</td></tr>
+                <tr><th>Accès</th><td>${feature.properties.acces || 'N/A'}</td></tr>
+                <tr><th>Label</th><td>${feature.properties.label || 'N/A'}</td></tr>
+                <tr><th>Type d'équipement</th><td>${feature.properties.type_equip || 'N/A'}</td></tr>
+                <tr><th>Eau</th><td>${feature.properties.eau || 'N/A'}</td></tr>
+                <tr><th>Toilettes</th><td>${feature.properties.toilettes || 'N/A'}</td></tr>
+                <tr><th>Chien</th><td>${feature.properties.chien || 'N/A'}</td></tr>
+                <tr><th>Espace canin</th><td>${feature.properties.esp_can || 'N/A'}</td></tr>
+            </table>
+        `;
+    } else if (feature.geometry.type === 'LineString' || feature.geometry.type === 'MultiLineString') {
+        // Informations pour les lignes (par exemple, lignes de métro)
+        infoContent.innerHTML = `
+            <table>
+                <tr><th>Nom de la ligne</th><td>${feature.properties.nom_trace || 'N/A'}</td></tr>
+                <tr><th>Code de la ligne</th><td>${feature.properties.code_ligne || 'N/A'}</td></tr>
+                <tr><th>Sens</th><td>${feature.properties.sens || 'N/A'}</td></tr>
+                <tr><th>Origine</th><td>${feature.properties.nom_origine || 'N/A'}</td></tr>
+                <tr><th>Destination</th><td>${feature.properties.nom_destination || 'N/A'}</td></tr>
+                <tr><th>Type de ligne</th><td>${feature.properties.nom_type_ligne || 'N/A'}</td></tr>
+                <tr><th>Accessibilité PMR</th><td>${feature.properties.pmr ? 'Oui' : 'Non'}</td></tr>
+                <tr><th>Dernière mise à jour</th><td>${feature.properties.last_update || 'N/A'}</td></tr>
+            </table>
+        `;
+    } else if (feature.geometry.type === 'Point') {
+        // Informations pour les points (stations)
+        infoContent.innerHTML = `
+            <table>
+                <tr><th>Nom de la station</th><td>${feature.properties.nom || 'N/A'}</td></tr>
+                <tr><th>Desserte</th><td>${feature.properties.desserte || 'N/A'}</td></tr>
+                <tr><th>Dernière mise à jour</th><td>${feature.properties.last_update || 'N/A'}</td></tr>
+            </table>
+        `;
+    }
+
+    
+                        // Zoomer sur l'entité cliquée avec une marge
+                        if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+                            var bounds = L.geoJSON(feature).getBounds();
+                            map.fitBounds(bounds.pad(1)); // Ajoutez une marge
+                            setTimeout(() => {
+                                map.panBy([0, -200]); // Ajustez cette valeur selon vos besoins
+                            }, 300); // Attendre que le zoom initial se termine
+                        }
+
+                        
+                        // Faire défiler la page vers le tableau d'information
+                        document.getElementById('info-panel').scrollIntoView({ behavior: 'smooth' });
+                    });
+                }
+            });
+
+            // Ajouter les points à un cluster
+            var markers = L.markerClusterGroup();
+            markers.addLayer(geojsonLayer);
+            map.addLayer(markers);
+
+            overlays[layerName] = markers;
+            layerControl.addOverlay(markers, layerName);
+
+            // Ajouter les limites de la couche au tableau
+            allLayersBounds.push(geojsonLayer.getBounds());
+
+            // Vérifier si toutes les couches sont chargées
+            if (allLayersBounds.length === 3) {
+                var combinedBounds = L.latLngBounds(allLayersBounds);
+                map.fitBounds(combinedBounds);
+            }
+        })
+        .catch(error => console.error('Erreur lors du chargement du fichier JSON:', error));
 }
 
-// Faire défiler la page vers le tableau d'information
-document.getElementById('info-panel').scrollIntoView({ behavior: 'smooth' });
-});
+function updateLegend() {
+    const visibleCategories = {
+        jardins: false,
+        lignes: false,
+        stations: false
+    };
+
+    map.eachLayer(layer => {
+        if (layer instanceof L.GeoJSON || layer instanceof L.Polygon) {
+            if (map.getBounds().intersects(layer.getBounds())) {
+                visibleCategories.jardins = true;
+            }
+        } else if (layer instanceof L.Polyline) {
+            if (map.getBounds().intersects(layer.getBounds())) {
+                visibleCategories.lignes = true;
+            }
+        } else if (layer instanceof L.MarkerClusterGroup) {
+            if (map.getBounds().intersects(layer.getBounds())) {
+                visibleCategories.stations = true;
+            }
+        }
+    });
+
+    const legendContainer = document.querySelector('.legend');
+    legendContainer.innerHTML = '<h4>Légende</h4>'; // Réinitialiser
+
+    if (visibleCategories.jardins) {
+        legendContainer.innerHTML += `
+            <div>
+                <span class="legend-shape jardin"></span> Parcs et jardins
+            </div>`;
+    }
+
+    if (visibleCategories.lignes) {
+        legendContainer.innerHTML += `
+            <div>
+                <div class="legend-line metro-line"></div> Lignes de métro
+            </div>`;
+    }
+
+    if (visibleCategories.stations) {
+        legendContainer.innerHTML += `
+            <div>
+                <img src="http://www.clipartbest.com/cliparts/niB/Edk/niBEdkxXT.png" width="20" height="20"> Entrées/sorties stations
+            </div>`;
+    }
 }
-});
 
+// Ajouter un événement de surbrillance pour les polygones et les lignes
+function highlightFeature(e) {
+    var layer = e.target;
 
+    // Appliquer un style de surbrillance (bleu clair)
+    layer.setStyle({
+        weight: 5,                // Poids de la bordure (plus épais)
+        color: '#66ccff',         // Couleur bleue claire
+        dashArray: '',            // Pas de lignes pointillées
+        fillOpacity: 0.7          // Opacité de remplissage (partiellement transparent)
+    });
 
-           // Ajouter les points à un cluster
-           var markers = L.markerClusterGroup();
-           markers.addLayer(geojsonLayer);
-           map.addLayer(markers);
-
-           overlays[layerName] = markers;
-           // Ajouter la couche au gestionnaire de couches
-           layerControl.addOverlay(markers, layerName);
-           // Ajouter les limites de la couche au tableau
-           allLayersBounds.push(geojsonLayer.getBounds());
-
-           // Vérifier si toutes les couches sont chargées
-           if (allLayersBounds.length === 3) {
-               // Combiner les limites de toutes les couches
-               var combinedBounds = L.latLngBounds(allLayersBounds);
-               // Ajuster la vue de la carte pour inclure toutes les couches
-               map.fitBounds(combinedBounds);
-           }
-       })
-       .catch(error => console.error('Erreur lors du chargement du fichier JSON:', error));
+    // Placer la couche sélectionnée au premier plan (au-dessus des autres)
+    layer.bringToFront();
 }
 
+// Fonction pour réinitialiser le style par défaut (enlever la surbrillance)
+function resetHighlight(e) {
+    var layer = e.target;
+
+    // Réinitialiser le style au style par défaut
+    layer.setStyle({
+        weight: 2,                // Poids par défaut de la bordure
+        color: '#3388ff',         // Couleur par défaut de la ligne (bleu)
+        dashArray: '3',           // Lignes pointillées
+        fillOpacity: 0.2          // Opacité par défaut (transparente)
+    });
+}
 // Charger les fichiers JSON et les ajouter au gestionnaire de couches
 loadJSON('data/tclstation.json', 'TCL Stations');
 loadJSON('data/sytral_tcl_sytral.json', 'Sytral TCL');
@@ -160,74 +250,61 @@ loadJSON('data/lyonparcjardin_latest.json', 'Lyon Parcs et Jardins');
 
 // Fonction pour mettre à jour la légende dynamiquement
 function updateLegend() {
-const visibleCategories = {
-    jardins: false,
-    lignes: false,
-    stations: false
-};
+    const visibleCategories = {
+        jardins: false,
+        lignes: false,
+        stations: false
+    };
 
-// Parcourir les couches de la carte
-map.eachLayer(layer => {
-    if (layer instanceof L.GeoJSON) {
-        // Si la couche GeoJSON est visible, afficher "Jardins"
-        if (map.getBounds().intersects(layer.getBounds())) {
-            visibleCategories.jardins = true;
+    map.eachLayer(layer => {
+        if (layer instanceof L.GeoJSON || layer instanceof L.Polygon) {
+            if (map.getBounds().intersects(layer.getBounds())) {
+                visibleCategories.jardins = true;
+            }
+        } else if (layer instanceof L.Polyline) {
+            if (map.getBounds().intersects(layer.getBounds())) {
+                visibleCategories.lignes = true;
+            }
+        } else if (layer instanceof L.MarkerClusterGroup) {
+            if (map.getBounds().intersects(layer.getBounds())) {
+                visibleCategories.stations = true;
+            }
         }
+    });
+
+    const legendContainer = document.querySelector('.legend');
+    legendContainer.innerHTML = '<h4>Légende</h4>'; // Réinitialiser
+
+    if (visibleCategories.jardins) {
+        legendContainer.innerHTML += `
+            <div>
+                <span class="legend-shape jardin"></span> Parcs et jardins
+            </div>`;
     }
 
-    // Vérifier les polygones (parcs et jardins)
-    else if (layer instanceof L.Polygon) {
-        if (map.getBounds().intersects(layer.getBounds())) {
-            visibleCategories.jardins = true;
-        }
+    if (visibleCategories.lignes) {
+        legendContainer.innerHTML += `
+            <div>
+                <div class="legend-line metro-line"></div> Lignes de métro
+            </div>`;
     }
 
-    // Vérifier les lignes (polylines)
-    else if (layer instanceof L.Polyline) {
-        if (map.getBounds().intersects(layer.getBounds())) {
-            visibleCategories.lignes = true;
-        }
+    if (visibleCategories.stations) {
+        legendContainer.innerHTML += `
+            <div>
+                <img src="http://www.clipartbest.com/cliparts/niB/Edk/niBEdkxXT.png" width="20" height="20"> Entrées/sorties stations
+            </div>`;
     }
-
-    // Vérifier les stations (MarkerClusterGroup)
-    else if (layer instanceof L.MarkerClusterGroup) {
-        if (map.getBounds().intersects(layer.getBounds())) {
-            visibleCategories.stations = true;
-        }
-    }
-});
-
-// Mise à jour du contenu de la légende
-const legendContainer = document.querySelector('.legend');
-legendContainer.innerHTML = '<h4>Légende</h4>'; // Réinitialiser le contenu
-
-// Ajouter les catégories visibles à la légende
-if (visibleCategories.jardins) {
-    legendContainer.innerHTML += `
-        <div>
-            <span class="legend-shape jardin"></span> Parcs et jardins
-        </div>`;
 }
 
-if (visibleCategories.lignes) {
-    legendContainer.innerHTML += `
-        <div>
-<span class="legend-shape" style="display: block; width: 20px; height: 5px; border: solid 5px; border-image: linear-gradient(to right, #FF6347, #FFD700, #00FF00, #1E90FF, #8A2BE2); border-image-slice: 1;"></span>
-            Lignes de métro
-        </div>`;
-}
 
-if (visibleCategories.stations) {
-    legendContainer.innerHTML += `
-        <div>
-            <img src="http://www.clipartbest.com/cliparts/niB/Edk/niBEdkxXT.png" width="20" height="20"> Entrées/sorties stations
-        </div>`;
-}
-}
 
-// Ajouter l'écouteur d'événement pour la mise à jour de la légende
+// Écoute des événements pour le gestionnaire de couches
+map.on('overlayadd', updateLegend);
+map.on('overlayremove', updateLegend);
+
+// Mettre à jour la légende au déplacement de la carte
 map.on('moveend', updateLegend);
 
-// Appeler une première fois pour initialiser la légende
+// Appeler la fonction au chargement initial
 updateLegend();
-

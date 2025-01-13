@@ -47,11 +47,6 @@ h1 {
 
 
 
-#id_special {
-    color: green;
-    text-decoration: double underline green; /* Ajoute un soulignement */
-
-}
 
 #id_taille { 
     width : 400px;
@@ -187,11 +182,11 @@ h1 {
     transition: margin-top 0.3s ease-in-out; /* Ajoutez une transition pour un effet de descente */
 }
 
-
-
 #info-panel h3 {
     margin-top: 0;
 }
+
+
 
 #info-content {
     margin-top: 10px;
@@ -215,49 +210,10 @@ h1 {
 }
 
 
-
-/* a essayer de mettre */
-.jardin-clicked {
-    fill: blue;
-    fill-opacity: 0.7;
-    stroke: darkgreen;
-    stroke-width: 10px;
-}
-
-.jardin-hover {
-    fill: yellow;
-    fill-opacity: 0.7;
-    stroke: orange;
-    stroke-width: 5px;
-}
-
-.line-hover {
-    stroke: orange;
-    stroke-width: 5px;
-}
-
-.point-hover {
-    fill: yellow;
-    fill-opacity: 0.7;
-    stroke: orange;
-    stroke-width: 5px;
-}
-
-.legend-shape {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    box-sizing: border-box;
-    border: 1px solid transparent;
-    background: transparent; /* Par défaut, transparent */
-}
-
 .legend-shape.jardin {
     background: radial-gradient(circle, rgba(0, 128, 0, 0.2) 50%, rgba(0, 128, 0, 1) 100%);
     border: 1px solid green;
 }
-
 
 /* Style pour les éléments de la légende */
 .legend h4 {
@@ -302,3 +258,31 @@ h1 {
 
 
 
+/* Cercle de survol pour les points */
+.leaflet-popup-content-wrapper {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
+
+.legend img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* Ligne multicolore pour la légende des lignes de métro */
+.legend-line.metro-line {
+    display: block;
+    width: 25px; /* Longueur de la ligne */
+    height: 8px; /* Épaisseur de la ligne */
+    background: linear-gradient(to right, #FF6347, #FFD700, #00FF00, #1E90FF, #8A2BE2);
+    margin: 5px 0; /* Espacement autour de la ligne */
+    border-radius: 3px; /* Coins arrondis */
+    margin-right: 5px;
+}
+
+.legend div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
