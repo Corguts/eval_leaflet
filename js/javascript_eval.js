@@ -173,60 +173,37 @@ loadJSON('data/lyonparcjardin_latest.json', 'Lyon Parcs et Jardins');
 
 // Fonction pour mettre à jour la légende dynamiquement
 function updateLegend() {
-    const visibleCategories = {
-        jardins: false,
-        lignes: false,
-        stations: false
-    };
+    const legendContainer = document.querySelector('.legend');
+    legendContainer.innerHTML = '<h4>Légende</h4>'; // Réinitialiser la légende
 
-    map.eachLayer(layer => {
-        if (layer instanceof L.GeoJSON || layer instanceof L.Polygon) {
-            if (map.getBounds().intersects(layer.getBounds())) {
-                visibleCategories.jardins = true;
-            }
-        } else if (layer instanceof L.Polyline) {
-            if (map.getBounds().intersects(layer.getBounds())) {
-                visibleCategories.lignes = true;
-            }
-        } else if (layer instanceof L.MarkerClusterGroup) {
-            if (map.getBounds().intersects(layer.getBounds())) {
-                visibleCategories.stations = true;
+    // Vérifier les couches visibles et les inclure dans la légende
+    for (let layerName in overlays) {
+        const layer = overlays[layerName];
+
+        if (map.hasLayer(layer)) {
+            if (layerName === 'Lyon Parcs et Jardins') {
+                legendContainer.innerHTML += `
+                    <div>
+                        <span class="legend-shape jardin"></span> Parcs et jardins
+                    </div>`;
+            } else if (layerName === 'Sytral TCL') {
+                legendContainer.innerHTML += `
+                    <div>
+                        <div class="legend-line metro-line"></div> Lignes de métro
+                    </div>`;
+            } else if (layerName === 'TCL Stations') {
+                legendContainer.innerHTML += `
+                    <div>
+                        <img src="http://www.clipartbest.com/cliparts/niB/Edk/niBEdkxXT.png" width="20" height="20"> Entrées/sorties stations
+                    </div>`;
             }
         }
-    });
-
-    const legendContainer = document.querySelector('.legend');
-    legendContainer.innerHTML = '<h4>Légende</h4>'; // Réinitialiser
-
-    if (visibleCategories.jardins) {
-        legendContainer.innerHTML += `
-            <div>
-                <span class="legend-shape jardin"></span> Parcs et jardins
-            </div>`;
-    }
-
-    if (visibleCategories.lignes) {
-        legendContainer.innerHTML += `
-            <div>
-                <div class="legend-line metro-line"></div> Lignes de métro
-            </div>`;
-    }
-
-    if (visibleCategories.stations) {
-        legendContainer.innerHTML += `
-            <div>
-                <img src="http://www.clipartbest.com/cliparts/niB/Edk/niBEdkxXT.png" width="20" height="20"> Entrées/sorties stations
-            </div>`;
     }
 }
 
-
-
-// Écoute des événements pour le gestionnaire de couches
+// Ajouter les écouteurs d'événements pour la mise à jour de la légende
 map.on('overlayadd', updateLegend);
 map.on('overlayremove', updateLegend);
-
-// Mettre à jour la légende au déplacement de la carte
 map.on('moveend', updateLegend);
 
 // Appeler la fonction au chargement initial
