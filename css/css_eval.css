@@ -7,7 +7,7 @@ body {
     /* background-color permet de modifier la couleur de fond  */
 }
 
-
+/* Style du titre à l'intérieur de la carte */
 h1 {
     font-size: 50px;
     color: #21317a;
@@ -21,13 +21,14 @@ h1 {
     height : 180px;
 }
 
+/* Style de la carte */
 #map {
     width: 100%;
     height: 90vh; /* Prend toute la hauteur de la fenêtre */
     position: relative;
 }
 
-
+/* Style du contour du titre de la carte */
 .map-title {
     position: absolute;
             top: 20px; /* Ajustez cette valeur pour positionner le titre */
@@ -46,27 +47,28 @@ h1 {
 }
 
 
-
-
+/* Style de l'image leaflet*/
 #id_taille { 
     width : 400px;
     height : 200px;
     margin-top: -50px; /* Déplace l'élément de 20px vers le haut */
 }
 
+/* Style de l'image geonum*/
 #id_taille2 { 
     width : 300px;
     height: auto; /* Conserve les proportions de l'image */
 }
 
+/* Style de l'image université Lyon 2*/
 #id_taille3 { 
     width : 300px;
     height: auto; /* Conserve les proportions de l'image */
     margin-top: -90px;
 }
 
-.auteur {
-    
+/* positionnement du texte des auteurs */
+.auteur { 
     text-align: center; /* Centre le texte horizontalement */
     position: absolute; /* Déplace l'élément de 20px vers la gauche */
     display: block; /* Fait revenir l'élément à la ligne */
@@ -76,9 +78,7 @@ h1 {
 }
 
 
-
-
-
+/* Style du container pour le tableau d'information */
 .container {
     position: relative;
     padding-top: 50px; /* Ajustez cette valeur pour que le container descende en même temps que l'info-panel */
@@ -90,8 +90,7 @@ h1 {
 } /* Ajoutez une transition pour un effet de descente */
 
 
-/* le container permet de faire une séparation  */
-
+/* Style et positionnement du trait de séparation*/
 .line {
     position: absolute;
     top: 20px;
@@ -103,6 +102,8 @@ h1 {
     /* applique la forme et la couleur de la séparation*/
 }
 
+
+/* Style du contenu du tableau d'information */
 .content {
     display: flex;
     align-items: center;
@@ -110,8 +111,7 @@ h1 {
     width: 100%;
 }
 
-/* alignement sur la même ligne des images et auteur */
-
+/* style du titre de l'etude */
 #id_etude { 
     color : rgb(95, 1, 95) ;
     font-size: 20px; /* Ajustez la taille de la police */
@@ -131,6 +131,7 @@ h1 {
     margin: 100px auto; /* Centre le bloc verticalement et horizontalement */
 }
 
+/* Style du contenu de l'info-panel */
 .text-content {
     display: flex;
     flex-direction: column;
@@ -147,7 +148,7 @@ h1 {
     position: absolute;
     top: 200px;  /* Positionner à 20px du bas */    
     right: 0px; /* Positionner à 20px de la gauche */
-    background-color: rgba(255, 255, 255, 0.7); /* Fond blanc transparent */
+    background-color: rgba(255, 255, 255, 0.8); /* Fond blanc transparent */
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
@@ -158,7 +159,7 @@ h1 {
 
 }
 
-
+/* style des polygones des parcs et des jardins */
 .jardin {
     fill: green;
     fill-opacity: 0.2;
@@ -166,7 +167,7 @@ h1 {
     stroke-width: 2px;
 }
 
-
+/* Style du panel d'information */
 #info-panel {
     position: absolute;
     top: 830px;
@@ -180,38 +181,31 @@ h1 {
     transition: margin-top 0.3s ease-in-out; /* Ajoutez une transition pour un effet de descente */
 }
 
+/* Style du titre du panel d'information */
 #info-panel h3 {
     margin-top: 0;
 }
 
 
-
+/* Style du contenu du panel d'information */
 #info-content {
     margin-top: 10px;
 }
 
+/* Style du tableau d'information */
 #info-content table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: collapse; /* Coller les bordures des cellules */
     font-family: 'Calibri', sans-serif; /* Change la police */
 }
 
+/* Style des cellules du tableau */
 #info-content th, #info-content td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center; /* Centre les informations dans les cellules */
 }
 
-
-#info-content th {
-    background-color: #f2f2f2;
-}
-
-
-.legend-shape.jardin {
-    background: radial-gradient(circle, rgba(0, 128, 0, 0.2) 50%, rgba(0, 128, 0, 1) 100%);
-    border: 1px solid green;
-}
 
 /* Style pour les éléments de la légende */
 .legend h4 {
@@ -229,39 +223,21 @@ h1 {
     border-radius: 3px;
 }
 
-.legend p {
-    display: flex;
-    align-items: center;
-    margin: 5px 0;
-}
 
-.legend .legend-shape {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    border: 1px solid #000;
-    box-sizing: border-box;
-}
-
+/* Style des couleurs des jardins dans la légende */
 .legend .jardin {
     background: radial-gradient(circle, rgba(0, 128, 0, 0.2) 50%, rgba(0, 128, 0, 1) 100%);
     border: 1px solid green;
 }
 
-.legend .legend-shape:not(.jardin) {
-    /* Pour les lignes avec couleur spécifique */
-    opacity: 1; /* S'assurer qu'elles ne sont pas transparentes */
-}
-
-
 
 /* Cercle de survol pour les points */
-.leaflet-popup-content-wrapper {
-    font-family: Arial, sans-serif;
+.leaflet-popup-content-wrapper { /* Style de la pop-up */
+    font-family: Arial, sans-serif; /* Police de caractères */
     font-size: 12px;
 }
 
+/* Style des images dans la légende */
 .legend img {
     width: 20px;
     height: 20px;
@@ -279,8 +255,9 @@ h1 {
     margin-right: 5px;
 }
 
+/* Style pour les éléments de la légende */
 .legend div {
-    display: flex;
-    align-items: center;
+    display: flex;  /* Utilisez flexbox pour aligner les éléments horizontalement */
+    align-items: center; /* Centre les éléments verticalement */
     margin-bottom: 8px;
 }
